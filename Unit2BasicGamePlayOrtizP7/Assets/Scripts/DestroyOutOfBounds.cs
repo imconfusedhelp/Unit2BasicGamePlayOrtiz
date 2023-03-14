@@ -10,10 +10,16 @@ public class DestroyOutOfBounds : MonoBehaviour
     // variable for lowerBound based on Z axis
     private float lowerBound = -10;
 
+    // variable for sideBound based on X axis
+    private float sideBound = 30;
+
+    // variable for GameManager script
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -27,8 +33,22 @@ public class DestroyOutOfBounds : MonoBehaviour
         }
         else if (transform.position.z < lowerBound)
         {
-            // display "Game Over!" in log when animal exits the lowerBound
-            Debug.Log("Game Over!");
+            // remove a life 
+            gameManager.AddLives(-1);
+
+            // destroy object
+            Destroy(gameObject);
+        }
+        else if (transform.position.x > sideBound)
+        {
+            gameManager.AddLives(-1);
+
+            // destroy object
+            Destroy(gameObject);
+        }
+        else if (transform.position.x < -sideBound)
+        {
+            gameManager.AddLives(-1);
 
             // destroy object
             Destroy(gameObject);
