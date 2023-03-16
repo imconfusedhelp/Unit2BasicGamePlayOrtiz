@@ -30,11 +30,10 @@ public class DetectCollisions : MonoBehaviour
             // destroy projectile
             Destroy(gameObject);
         }
-        else if (other.CompareTag("Animal"))
+        if(other.CompareTag("Animal"))
         {
-            gameManager.AddScore(5);
+            other.GetComponent<AnimalHunger>().FeedAnimal(1);
             Destroy(gameObject);
-            Destroy(other.gameObject);
         }
 
     }
